@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= title %></title>
+  <% include ../layouts/head %>
+  <style type="text/css">
+    body{
+      background-color: #EEEEEE;
+    }
+    .setup-container{
+      background-color: white;
+      padding-top: 50px;
+      margin-left: 150px;
+      margin-right: 150px;
+    }
+    main{
+      padding-top: 50px;
+    }
+  </style>
+</head>
+<body>
+  <main class="container">
+   <div class="row setup-container">
+    <div class="col-sm-12">
+      <p class="text-center">
+        <img src="/stylesheets/dualcube_logo.png" class="" alt="Dualcube">
+      </p>
+      <h4>Wellcome</h4>
+      <% if(errors){ %>
+          <% for(var i=0; i<errors.length; i++) { %>
+            <div class="alert alert-danger"><%= errors[i].msg %></div>
+        <% } %>
+      <% } %>
+      <hr>
+      <form class="form-horizontal" action="/users/setup" method="post">
+        <div class="form-group">
+          <label class="control-label col-sm-3" for="username">Username</label>
+          <div class="col-sm-7">
+            <input type="text" class="form-control" id="username" name="username" placeholder="Username">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label col-sm-3" for="password">Password</label>
+          <div class="col-sm-7">          
+            <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label col-sm-3">Confirm Password</label>
+          <div class="col-sm-7"> 
+            <input type="password" class="form-control" placeholder="Password" name="password2">  
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label col-sm-3" for="email">Email</label>
+          <div class="col-sm-7">
+            <input type="email" class="form-control" id="email" name="email" placeholder="Email">
+          </div>
+        </div>
+        <input type="hidden" name="type" value="admin">
+        <div class="form-group">        
+          <div class="col-sm-offset-3 col-sm-7">
+            <button type="submit" class="btn btn-default">Install</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <% include ../layouts/footer %>
+</footer>
+
+</body>
+</html>
