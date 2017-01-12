@@ -26,5 +26,8 @@
     padding-right: 10px;
 }
 .sub-nav>li>a{
-    padding: 0px 45px !important;
+    padding: 0px 15px !important;
+}
+.table-comtainer{
+    margin-top: 50px;
 }

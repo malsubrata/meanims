@@ -12,11 +12,11 @@
             <a href="/"><i class="fa fa-tachometer" aria-hidden="true"></i> Dashboard</a>
         </li>
         <li>
-            <a href="#" id="nav-items" data-toggle="collapse" data-target="#submenu1" aria-expanded="false"><i class="fa fa-cube" aria-hidden="true"></i> Items</a>
-            <ul class="nav collapse sub-nav" id="submenu1" role="menu" aria-labelledby="nav-items">
-                <li><a href="#">Add Item</a></li>
-                <li><a href="#">Item Category</a></li>
-                <li><a href="#">Unit Of Measurement</a></li>
+            <a href="#" onclick="return false;" id="nav-items" data-toggle="collapse" data-target="#submenu1" aria-expanded="false"><i class="fa fa-cube" aria-hidden="true"></i> Items</a>
+            <ul class="nav collapse sub-nav <% if(selectedMenu == 'items'){ %> in <% } %>" id="submenu1" role="menu" aria-labelledby="nav-items">
+                <li><a href="/items/"><i class="fa fa-upload" aria-hidden="true"></i> Items</a></li>
+                <li><a href="/items/category"><i class="fa fa-sitemap" aria-hidden="true"></i> Item Category</a></li>
+                <li><a href="#"><i class="fa fa-balance-scale" aria-hidden="true"></i> Unit Of Measurement</a></li>
             </ul>
         </li>
         <li>
