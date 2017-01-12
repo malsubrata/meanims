@@ -1,0 +1,23 @@
+{
+  "name": "meanims",
+  "description": "Inventory managment system",
+  "main": "",
+  "authors": [
+    "subrata-dc <subrata@dualcube.com>"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "componentsDirectory": "public/",
+  "dependencies": {
+    "angular": "1.6.1",
+    "bootstrap": "^3.3.7",
+    "components-font-awesome": "^4.7.0"
+  }
+}

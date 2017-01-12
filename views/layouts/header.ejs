@@ -1,19 +1,36 @@
 <!-- views/partials/header.ejs -->
 
-<nav class="navbar navbar-default" role="navigation">
-    <div class="container-fluid">
-
-        <div class="navbar-header">
-            <a class="navbar-brand" href="#">
-                <span class="glyphicon glyphicon glyphicon-tree-deciduous"></span>
-                EJS Is Fun
+<!-- Sidebar -->
+<div id="sidebar-wrapper">
+    <ul class="sidebar-nav">
+        <li class="sidebar-brand">
+            <a href="/">
+                <img src="/stylesheets/dclogo-2x.png" alt="logo" /> Dualcube
             </a>
-        </div>
-
-        <ul class="nav navbar-nav">
-            <li><a href="/">Home</a></li>
-            <li><a href="/users">Users</a></li>
-        </ul>
-      
-    </div>
-</nav>
+        </li>
+        <li>
+            <a href="/"><i class="fa fa-tachometer" aria-hidden="true"></i> Dashboard</a>
+        </li>
+        <li>
+            <a href="#" id="nav-items" data-toggle="collapse" data-target="#submenu1" aria-expanded="false"><i class="fa fa-cube" aria-hidden="true"></i> Items</a>
+            <ul class="nav collapse sub-nav" id="submenu1" role="menu" aria-labelledby="nav-items">
+                <li><a href="#">Add Item</a></li>
+                <li><a href="#">Item Category</a></li>
+                <li><a href="#">Unit Of Measurement</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="#"><i class="fa fa-server" aria-hidden="true"></i> Update Stock</a>
+        </li>
+        <li>
+            <a href="#"><i class="fa fa-building-o" aria-hidden="true"></i> Issue Items</a>
+        </li>
+        <li>
+            <a href="#"><i class="fa fa-cutlery" aria-hidden="true"></i> Daily Sales & Cost Report</a>
+        </li>
+        <li>
+            <a href="/users/logout/"><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</a>
+        </li>
+    </ul>
+</div>
+<!-- /#sidebar-wrapper -->
