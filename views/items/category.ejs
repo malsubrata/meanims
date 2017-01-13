@@ -14,8 +14,8 @@
                 <div class="user-holder">Hi, <%= locals.user.username %></div>
             </div>
             <!-- Page Content -->
-            <div id="page-content-wrapper">
-                <div class="container-fluid">
+            <div id="page-content-wrapper" ng-app="itemsCategory">
+                <div class="container-fluid" ng-controller="itemsCategoryCtrl">
                     <div class="row">
                         <div class="col-lg-12">
                             <h2>Category</h2>
@@ -46,8 +46,8 @@
                                         <tr>
                                             <td><%= categorys[i].category_name %></td>
                                             <td style="text-align:center;">
-                                                <i class="fa fa-pencil btn btn-primary" aria-hidden="true"></i>&nbsp;
-                                                <i class="fa fa-trash-o btn btn-danger" aria-hidden="true"></i>
+                                                <i class="fa fa-pencil btn btn-primary" ng-click="bindEditForm('<%= categorys[i]._id %>','<%= categorys[i].category_name %>')" aria-hidden="true" data-toggle="modal" data-target="#editModal"></i>&nbsp;
+                                                <i class="fa fa-trash-o btn btn-danger" ng-click="conformDelete('<%= categorys[i]._id %>')" aria-hidden="true" data-toggle="modal" data-target="#deleteModal"></i>
                                             </td>
                                         </tr>
                                         <% } %>
@@ -82,6 +82,60 @@
 
                                 </div>
                             </div>
+                            <!-- Edit Modal -->
+                            <div id="editModal" class="modal fade" role="dialog">
+                                <div class="modal-dialog">
+
+                                    <!-- Modal content-->
+                                    <div class="modal-content">
+                                        <form action="{{action}}" method="post">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                <h4 class="modal-title">Update Category</h4>
+                                            </div>
+                                            <div class="modal-body">
+                                            <input type="hidden" name="id" ng-model="cat_id" value="{{cat_id}}">
+                                            <input type="hidden" name="action" value="edit">
+                                                <div class="form-group">
+                                                    <label for="name">Categoty Name</label>
+                                                    <input type="text" class="form-control" ng-model="cat_name" id="name" name="name" placeholder="Categoy Name">
+                                                </div>
+
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="submit" class="btn btn-default">Update</button>
+                                            </div>
+                                        </form>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <!-- Delete Modal -->
+                            <div id="deleteModal" class="modal fade" role="dialog">
+                                <div class="modal-dialog">
+
+                                    <!-- Modal content-->
+                                    <div class="modal-content">
+                                        <form action="{{action}}" method="post">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                <h4 class="modal-title">Delete Category</h4>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="form-group">
+                                                    <h2>Are you sure want to delete?</h2>
+                                                    <input type="hidden" name="action" value="delete">
+                                                </div>
+
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="submit" class="btn btn-danger">Delete</button>
+                                            </div>
+                                        </form>
+                                    </div>
+
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -92,7 +146,7 @@
         <!-- /#wrapper -->
 
         <% include ../layouts/foot %>
-
+        <script type="text/javascript" src="/javascripts/item_category.js"></script>
     </body>
 
 </html>

@@ -36,5 +36,13 @@ module.exports.getAllCategory = function(callback){
 }
 
 module.exports.getCategoryById = function(id, callback){
-    User.findById(id, callback);
+    ItemCategory.findById(id, callback);
+}
+
+module.exports.updateCategory = function(category,callback){
+    ItemCategory.update({_id: category.id},{category_name: category.name},callback);
+}
+
+module.exports.deleteCategory = function(id,callback){
+    ItemCategory.findByIdAndRemove({_id:id},callback);
 }

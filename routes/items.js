@@ -8,13 +8,13 @@ var ItemCategory = require('../models/item_category');
 router.get('/',ensureAuthenticated, function(req, res, next) {
     res.render('items/items', { title: 'Items',selectedMenu: 'items' });
 });
-
+/* Display category lidt */
 router.get('/category/',ensureAuthenticated,function(req,res,next){
     ItemCategory.getAllCategory(function(err,categorys){
         res.render('items/category',{ title: 'Item Category',selectedMenu: 'items',errors:{}, categorys: categorys });
     });
 });
-
+/* create category */
 router.post('/category/',ensureAuthenticated,function(req,res,next){
     var category_name = req.body.name;
     // Validation
@@ -40,6 +40,22 @@ router.post('/category/',ensureAuthenticated,function(req,res,next){
             console.log(category);
         });
         res.redirect('/items/category/');
+    }
+});
+/* Update and Delete category */
+router.post('/category/:id',ensureAuthenticated,function(req,res,next){
+    if(req.body.action){
+        if(req.body.action === 'edit' ){
+            ItemCategory.updateCategory(req.body,function(err,category){
+                if(err) throw err;
+                res.redirect('/items/category/');
+            });
+        } else{
+            ItemCategory.deleteCategory(req.params.id,function(err){
+                if(err) throw err;
+                res.redirect('/items/category/');
+            });
+        }
     }
 });
 
