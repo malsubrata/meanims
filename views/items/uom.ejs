@@ -14,40 +14,40 @@
                 <div class="user-holder">Hi, <%= locals.user.username %></div>
             </div>
             <!-- Page Content -->
-            <div id="page-content-wrapper" ng-app="itemsCategory">
-                <div class="container-fluid" ng-controller="itemsCategoryCtrl">
+            <div id="page-content-wrapper" ng-app="uom">
+                <div class="container-fluid" ng-controller="uomCtrl">
                     <div class="row">
                         <div class="col-lg-12">
-                            <h2>Category</h2>
+                            <h2>Unit Of Mesurements</h2>
                             <% if(errors){ %>
                             <% for(var i=0; i<errors.length; i++) { %>
                             <div class="alert alert-danger"><%= errors[i].msg %><i class="fa fa-times pull-right btn-close-error" aria-hidden="true"></i></div>
                             <% } %>
                             <% } %>
                             <!-- Trigger the modal with a button -->
-                            <button type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target="#myModal">Add New Category</button>
+                            <button type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target="#myModal">Add New UOM</button>
                             <div class="table-comtainer">
                                 <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
                                     <thead>
                                         <tr>
-                                            <th>Category Name</th>
+                                            <th>Unit Name</th>
                                             <th style="width:10%;"></th>
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
-                                            <th>Category Name</th>
+                                            <th>Unit Name</th>
                                             <th></th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
-                                        <% if(categorys.length > 0){ %>
-                                        <% for(var i=0; i<categorys.length; i++) { %>
+                                        <% if(uoms.length > 0){ %>
+                                        <% for(var i=0; i<uoms.length; i++) { %>
                                         <tr>
-                                            <td><%= categorys[i].category_name %></td>
+                                            <td><%= uoms[i].unit %></td>
                                             <td style="text-align:center;">
-                                                <i class="fa fa-pencil btn btn-primary" ng-click="bindEditForm('<%= categorys[i]._id %>','<%= categorys[i].category_name %>')" aria-hidden="true" data-toggle="modal" data-target="#editModal"></i>&nbsp;
-                                                <i class="fa fa-trash-o btn btn-danger" ng-click="conformDelete('<%= categorys[i]._id %>')" aria-hidden="true" data-toggle="modal" data-target="#deleteModal"></i>
+                                                <i class="fa fa-pencil btn btn-primary" ng-click="bindEditForm('<%= uoms[i]._id %>','<%= uoms[i].unit %>')" aria-hidden="true" data-toggle="modal" data-target="#editModal"></i>&nbsp;
+                                                <i class="fa fa-trash-o btn btn-danger" ng-click="conformDelete('<%= uoms[i]._id %>')" aria-hidden="true" data-toggle="modal" data-target="#deleteModal"></i>
                                             </td>
                                         </tr>
                                         <% } %>
@@ -61,16 +61,16 @@
 
                                     <!-- Modal content-->
                                     <div class="modal-content">
-                                        <form action="/items/category" method="post">
+                                        <form action="/items/uom" method="post">
                                             <div class="modal-header">
                                                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                                <h4 class="modal-title">Add New Category</h4>
+                                                <h4 class="modal-title">Add New Unit</h4>
                                             </div>
                                             <div class="modal-body">
 
                                                 <div class="form-group">
-                                                    <label for="name">Categoty Name</label>
-                                                    <input type="text" class="form-control" id="name" name="name" placeholder="Categoy Name">
+                                                    <label for="name">Unit Name</label>
+                                                    <input type="text" class="form-control" id="name" name="name" placeholder="Unit Name">
                                                 </div>
 
                                             </div>
@@ -91,13 +91,12 @@
                                         <form action="{{action}}" method="post">
                                             <div class="modal-header">
                                                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                                <h4 class="modal-title">Update Category</h4>
+                                                <h4 class="modal-title">Update Unit</h4>
                                             </div>
                                             <div class="modal-body">
-                                            <input type="hidden" name="id" ng-model="cat_id" value="{{cat_id}}">
                                             <input type="hidden" name="action" value="edit">
                                                 <div class="form-group">
-                                                    <label for="name">Categoty Name</label>
+                                                    <label for="name">Unit Name</label>
                                                     <input type="text" class="form-control" ng-model="cat_name" id="name" name="name" placeholder="Categoy Name">
                                                 </div>
 
@@ -119,7 +118,7 @@
                                         <form action="{{action}}" method="post">
                                             <div class="modal-header">
                                                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                                <h4 class="modal-title">Delete Category</h4>
+                                                <h4 class="modal-title">Delete Unit</h4>
                                             </div>
                                             <div class="modal-body">
                                                 <div class="form-group">
@@ -146,7 +145,7 @@
         <!-- /#wrapper -->
 
         <% include ../layouts/foot %>
-        <script type="text/javascript" src="/javascripts/item_category.js"></script>
+        <script type="text/javascript" src="/javascripts/uom.js"></script>
     </body>
 
 </html>

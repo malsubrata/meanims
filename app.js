@@ -14,7 +14,9 @@ var LocalStrategy = require('passport-local').Strategy;
 var mongo = require('mongodb');
 var mongoose = require('mongoose');
 /* Db setup */
-mongoose.connect('mongodb://localhost/meanims');
+mongoose.connect('mongodb://localhost/meanims',function(err){
+    if(err) throw err;
+});
 var db = mongoose.connection;
 /* router config */
 var index = require('./routes/index');

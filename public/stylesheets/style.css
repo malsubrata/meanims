@@ -31,3 +31,6 @@
 .table-comtainer{
     margin-top: 50px;
 }
+.btn-close-error{
+    cursor: pointer;
+}

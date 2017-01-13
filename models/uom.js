@@ -25,7 +25,7 @@ var UOMSchema = mongoose.Schema({
     }
 });
 
-var UOM = module.exports = mongoose.model('Item_category', UOMSchema);
+var UOM = module.exports = mongoose.model('Uom', UOMSchema);
 
 module.exports.createUOM = function(newUOM, callback){
     newUOM.save(callback);
@@ -39,8 +39,8 @@ module.exports.getUOMById = function(id, callback){
     UOM.findById(id, callback);
 }
 
-module.exports.updateUOM = function(UOM,callback){
-    //UOM.update({_id: category.id},{category_name: category.name},callback);
+module.exports.updateUOM = function(_id,uom,callback){
+    UOM.update({_id: _id},{unit: uom.name},callback);
 }
 
 module.exports.deleteUOM = function(id,callback){
