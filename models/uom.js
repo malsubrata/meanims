@@ -40,7 +40,7 @@ module.exports.getUOMById = function(id, callback){
 }
 
 module.exports.updateUOM = function(_id,uom,callback){
-    UOM.update({_id: _id},{unit: uom.name},callback);
+    UOM.update({_id: _id},{unit: uom.name,updated_date: new Date()},callback);
 }
 
 module.exports.deleteUOM = function(id,callback){

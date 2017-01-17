@@ -8,22 +8,26 @@ var ItemSchema = mongoose.Schema({
     item_description: {
         type: String, index:true, default: ''
     },
+    item_cat_id: [{
+        type: mongoose.Schema.Types.ObjectId, ref: 'Item_category'
+    }],
     uom_id: {
         type: mongoose.Schema.Types.ObjectId, ref: 'UOM'
     },
     item_rate: {
         type: Number, default: 0.0
-    }
+    },
+    vendor_id:{
+        type: mongoose.Schema.Types.ObjectId, ref: 'User'
+    },
     created_by: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User'
+        type: mongoose.Schema.Types.ObjectId, ref: 'User'
     },
     created_date: {
         type: Date, default: Date.now
     },
     updated_by: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User'
+        type: mongoose.Schema.Types.ObjectId, ref: 'User'
     },
     updated_date:{
         type: Date, default: Date.now
@@ -40,7 +44,7 @@ module.exports.createItem = function(newItem, callback){
 }
 
 module.exports.getAllItems = function(callback){
-    Items.find({},callback);
+    Items.find({}).populate('item_cat_id').exec(callback);
 }
 
 module.exports.getItemById = function(id, callback){

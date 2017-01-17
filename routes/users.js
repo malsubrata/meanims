@@ -63,7 +63,9 @@ router.post('/setup', function(req, res){
 		var newUser = new User({
 			username: username,
 			email:email,
-			password: password
+			password: password,
+			display_name: username,
+			type: 'admin'
 		});
 
 		User.createUser(newUser, function(err, user){
@@ -107,6 +109,13 @@ passport.deserializeUser(function(id, done) {
 
 router.post('/login', passport.authenticate('local', {successRedirect:'/', failureRedirect:'/users/login',failureFlash: true}), function(req, res) {
 	res.redirect('/');
+});
+
+router.get('/vendorlist',function(req, res){
+	User.getUsersByType('vendor',function(err,users){
+		if(err) throw err;
+		res.json(users);
+	})
 });
 
 router.get('/logout', function(req, res){

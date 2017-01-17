@@ -5,17 +5,24 @@ var router = express.Router();
 var ItemCategory = require('../models/item_category');
 /* UOM Model */
 var UOM = require('../models/uom');
+/* Items Model */
+var Items = require('../models/items');
 
-/* GET home page. */
-router.get('/',ensureAuthenticated, function(req, res, next) {
-    res.render('items/items', { title: 'Items',selectedMenu: 'items' });
-});
+
 /* Display category lidt */
 router.get('/category/',ensureAuthenticated,function(req,res,next){
     ItemCategory.getAllCategory(function(err,categorys){
         res.render('items/category',{ title: 'Item Category',selectedMenu: 'items',errors:{}, categorys: categorys });
     });
 });
+/* get all category */
+router.get('/category/allcategory',function(req,res,next){
+    ItemCategory.getAllCategory(function(err,categorys){
+        if(err) throw err;
+        res.json(categorys);
+    });
+});
+
 /* create category */
 router.post('/category/',ensureAuthenticated,function(req,res,next){
     var category_name = req.body.name;
@@ -67,6 +74,14 @@ router.get('/uom/',ensureAuthenticated,function(req,res,next){
     });
 });
 
+/* get all UOM */
+router.get('/uom/alluom',function(req,res,next){
+    UOM.getAllUOM(function(err,uom){
+        if(err) throw err;
+        res.json(uom);
+    });
+});
+
 /* Create new UOM */
 router.post('/uom/',ensureAuthenticated,function(req,res,next){
     var unit = req.body.name;
@@ -109,6 +124,33 @@ router.post('/uom/:id',ensureAuthenticated,function(req,res,next){
             });
         }
     }
+});
+/* GET All Items */
+router.get('/getAllItems/',function(req,res,next){
+    Items.getAllItems(function(err,items){
+        if(err) throw err;
+        res.json(items);
+    });
+});
+/* create items */
+router.post('/createItem/',ensureAuthenticated,function(req, res, next){
+    var newItem = new Items({
+        item_name: req.body.item_name,
+        item_description: req.body.item_description,
+        item_cat_id: req.body.item_cat_id,
+        uom_id: req.body.uom_id,
+        item_rate: req.body.item_rate,
+        vendor_id: req.body.vendor_id,
+        created_by: req.user._id
+    });
+    Items.createItem(newItem,function(err,item){
+        if (err) throw err;
+        res.json(item);
+    });
+});
+/* GET home page. */
+router.get('/*',ensureAuthenticated, function(req, res, next) {
+    res.render('items/items', { title: 'Items',selectedMenu: 'items',errors:{} });
 });
 
 function ensureAuthenticated(req, res, next){

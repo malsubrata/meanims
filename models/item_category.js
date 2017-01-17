@@ -40,7 +40,7 @@ module.exports.getCategoryById = function(id, callback){
 }
 
 module.exports.updateCategory = function(category,callback){
-    ItemCategory.update({_id: category.id},{category_name: category.name},callback);
+    ItemCategory.update({_id: category.id},{category_name: category.name, updated_date: Date.now},callback);
 }
 
 module.exports.deleteCategory = function(id,callback){

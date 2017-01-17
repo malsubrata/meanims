@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+    <base href="/items/">
     <% include ../layouts/head %>
 </head>
 
@@ -9,16 +10,19 @@
 
     <div id="wrapper">
         <% include ../layouts/header %>
-        <div class="adminbar">
-        	<div class="toggle-icon-holder"><i class="fa fa-bars fa-2 menu-toggle" aria-hidden="true" id="menu-toggle"></i></div>
-        	<div class="user-holder">Hi, <%= locals.user.username %></div>
-        </div>
+        
         <!-- Page Content -->
-        <div id="page-content-wrapper">
+        <div id="page-content-wrapper" ng-app="items">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1>Items</h1>
+                        <h1>Items <a ui-sref="app.addItem" class="btn btn-primary pull-right" ng-hide="addNew">Add New</a></h1>
+                        <% if(errors){ %>
+                        <% for(var i=0; i<errors.length; i++) { %>
+                            <div class="alert alert-danger"><%= errors[i].msg %><i class="fa fa-times pull-right btn-close-error" aria-hidden="true"></i></div>
+                        <% } %>
+                        <% } %>
+                        <div ui-view="content"></div>
                     </div>
                 </div>
             </div>
@@ -29,7 +33,8 @@
     <!-- /#wrapper -->
 
     <% include ../layouts/foot %>
-
+    <script type="text/javascript" src="/bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+    <script type="text/javascript" src="/javascripts/items.js"></script>
 </body>
 
 </html>
