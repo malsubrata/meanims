@@ -20,13 +20,13 @@
 		</tr>
 	</tfoot>
 	<tbody>
-	<tr ng-repeat="(key, value) in allItems">
-		<td>{{value.item_name}}</td>
+	<tr ng-repeat="(key, item) in allItems">
+		<td>{{item.item_name}}</td>
 		<td></td>
-		<td></td>
-		<td>{{value.item_rate}}</td>
-		<td></td>
-		<td>{{value.item_description}}</td>
+		<td>{{item.uom_id.unit}}</td>
+		<td>{{item.item_rate}}</td>
+		<td>{{item.vendor_id.display_name}}</td>
+		<td>{{item.item_description}}</td>
 	</tr>
 	</tbody>
 </table>

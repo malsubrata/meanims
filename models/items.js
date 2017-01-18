@@ -12,7 +12,7 @@ var ItemSchema = mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId, ref: 'Item_category'
     }],
     uom_id: {
-        type: mongoose.Schema.Types.ObjectId, ref: 'UOM'
+        type: mongoose.Schema.Types.ObjectId, ref: 'Uom'
     },
     item_rate: {
         type: Number, default: 0.0
@@ -44,7 +44,7 @@ module.exports.createItem = function(newItem, callback){
 }
 
 module.exports.getAllItems = function(callback){
-    Items.find({}).populate('item_cat_id').exec(callback);
+    Items.find({}).populate('item_cat_id uom_id vendor_id').exec(callback);
 }
 
 module.exports.getItemById = function(id, callback){
