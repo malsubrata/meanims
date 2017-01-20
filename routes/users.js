@@ -5,17 +5,6 @@ var LocalStrategy = require('passport-local').Strategy;
 /* user model */
 var User = require('../models/user');
 
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-	User.getAllUser(function(err,users){
-		if(users.length > 0){
-			res.redirect('/users/login');
-		} else{
-			res.redirect('/users/setup');
-		}
-	});
-});
-
 // Register
 router.get('/setup', function(req, res){
 	User.getAllUser(function(err,users){
@@ -25,6 +14,14 @@ router.get('/setup', function(req, res){
 			res.render('user/setup',{ title: 'Setup',errors:{} });
 		}
 	});
+});
+
+/* GET All Items */
+router.get('/getAllUsers/',function(req,res,next){
+    User.getAllUser(function(err,items){
+        if(err) throw err;
+        res.json(items);
+    });
 });
 
 // Login
@@ -122,6 +119,21 @@ router.get('/logout', function(req, res){
 	req.logout();
 	req.flash('success_msg', 'You are logged out');
 	res.redirect('/users/login');
+});
+
+/* GET users listing. */
+router.get('/*', function(req, res, next) {
+	User.getAllUser(function(err,users){
+		if(users.length > 0){
+            if(req.isAuthenticated()){
+                res.render('user/users',{ title: 'Setup', selectedMenu: '', errors:{} });
+            } else{
+                res.redirect('/users/login');
+            }
+		} else{
+			res.redirect('/users/setup');
+		}
+	});
 });
 
 module.exports = router;

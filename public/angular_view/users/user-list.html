@@ -1,0 +1,26 @@
+<table class="table table-striped table-bordered">
+	<thead>
+		<tr>
+			<th>Username</th>
+			<th>Display Name</th>
+			<th>User type</th>
+            <th></th>
+		</tr>
+	</thead>
+	<tfoot>
+		<tr>
+			<th>Username</th>
+			<th>Display Name</th>
+			<th>User type</th>
+            <th></th>
+		</tr>
+	</tfoot>
+	<tbody>
+	<tr ng-repeat="(key, user) in allUsers">
+		<td>{{user.username}}</td>
+		<td>{{user.display_name}}</td>
+		<td>{{user.type}}</td>
+		<td></td>
+	</tr>
+	</tbody>
+</table>
