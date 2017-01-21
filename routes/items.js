@@ -7,6 +7,8 @@ var ItemCategory = require('../models/item_category');
 var UOM = require('../models/uom');
 /* Items Model */
 var Items = require('../models/items');
+/* Contract Model */
+var Contract = require('../models/item_contract');
 
 
 /* Display category lidt */
@@ -125,6 +127,54 @@ router.post('/uom/:id',ensureAuthenticated,function(req,res,next){
         }
     }
 });
+/* Display All Contract List */
+router.get('/contract/',ensureAuthenticated,function(req,res,next){
+    Contract.getAllContract(function(err,Contracts){
+        res.render('items/contract',{ title: 'Contracts',selectedMenu: 'items',errors:{}, contracts: Contracts });
+    });
+});
+
+/* Create new Contract */
+router.post('/contract/',ensureAuthenticated,function(req,res,next){
+    var item_id = req.body.item_id;
+    var item_rate = req.body.item_rate;
+    var start_date = req.body.start_date;
+    var end_date = req.body.end_date;
+    var vendor_id = req.body.vendor_id;
+    // Validation
+    req.checkBody('item_id', 'Please Select a Item').notEmpty();
+    req.checkBody('item_rate', 'Item price is required').notEmpty();
+    req.checkBody('start_date', 'Start Date is required').notEmpty();
+    req.checkBody('end_date', 'End Date is required').notEmpty();
+    req.checkBody('vendor_id', 'Please Select a Vendor').notEmpty();
+    var errors = req.validationErrors();
+    if(errors){
+        Contract.getAllContract(function(err,uoms){
+            res.render('items/contract',{
+                title: 'Contracts',
+                selectedMenu: 'items',
+                errors:errors,
+                contracts: Contracts
+            });
+        });
+    } else{
+        var newContract = new Contract({
+            item_id: item_id,
+            item_rate: item_rate,
+            start_date: new Date(start_date),
+            end_date: new Date(end_date),
+            vendor_id: vendor_id,
+            created_by:req.user._id,
+            updated_by:req.user._id
+        });
+        console.log(newContract);
+        Contract.createContract(newContract,function(err,category){
+            if(err) throw err;
+        });
+        res.redirect('/items/contract/');
+    }
+});
+
 /* GET All Items */
 router.get('/getAllItems/',function(req,res,next){
     Items.getAllItems(function(err,items){
@@ -132,6 +182,13 @@ router.get('/getAllItems/',function(req,res,next){
         res.json(items);
     });
 });
+/* Get items by id */
+router.get('/getItem/:_id',function(req,res,next){
+    Items.getItemById(req.params._id,function(err,item){
+        if(err) throw err;
+        res.json(item);
+    });
+})
 /* create items */
 router.post('/createItem/',ensureAuthenticated,function(req, res, next){
     var newItem = new Items({
@@ -148,6 +205,31 @@ router.post('/createItem/',ensureAuthenticated,function(req, res, next){
         res.json(item);
     });
 });
+
+/* Update item */
+router.put('/updateItem/:_id',ensureAuthenticated,function(req, res, next){
+    var updateItem = new Items({
+        item_name: req.body.item_name,
+        item_description: req.body.item_description,
+        item_cat_id: req.body.item_cat_id,
+        uom_id: req.body.uom_id,
+        item_rate: req.body.item_rate,
+        vendor_id: req.body.vendor_id,
+        updated_by: req.user._id
+    });
+    Items.updateItem(req.params._id, updateItem,function(err,item){
+        if (err) throw err;
+        res.json(item);
+    });
+});
+/* Delete item */
+router.delete('/deleteItem/:_id',ensureAuthenticated,function(req,res,next){
+    Items.deleteItem(req.params._id,function(err,status){
+        if(err) throw err;
+        res.json(status);
+    })
+});
+
 /* GET home page. */
 router.get('/*',ensureAuthenticated, function(req, res, next) {
     res.render('items/items', { title: 'Items',selectedMenu: 'items',errors:{} });

@@ -51,8 +51,22 @@ module.exports.getItemById = function(id, callback){
     Items.findById(id, callback);
 }
 
-module.exports.updateItem = function(category,callback){
-    //Items.update({_id: category.id},{category_name: category.name},callback);
+module.exports.updateItem = function(_id,item,callback){
+    Items.update(
+        {
+            _id: _id
+        },
+        {
+            item_name: item.item_name
+            ,item_description: item.item_description
+            ,item_cat_id: item.item_cat_id
+            ,uom_id: item.uom_id
+            ,item_rate: item.item_rate
+            ,vendor_id: item.vendor_id
+            ,updated_date: new Date()
+        },
+        callback
+    );
 }
 
 module.exports.deleteItem = function(id,callback){
