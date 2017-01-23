@@ -109,7 +109,9 @@ app.controller('stockInlistCtrl', ['getAllItems', 'getAllItemsCategory', '$scope
     });
     getAllItemsCategory.getCategory().then(function(data){
         $scope.categories = data;
+		$scope.category= $scope.categories[0];
     });
+
 //    $scope.confirmDeleteItem = function(_id){
 //        $scope.itemTodelete = _id;
 //    }

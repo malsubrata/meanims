@@ -1,7 +1,5 @@
 <div class="form-group table-filter-container col-sm-2 pull-right">
-    <select class="form-control">
-        <option ng-repeat="(key, categorie) in categories" value="{{categorie._id}}">{{categorie.category_name}}</option>
-    </select>
+    <select class="form-control" ng-options="category as category.category_name for category in categories track by category._id" ng-model="category"></select>
 </div>
 <table class="table table-striped table-bordered">
     <thead>
@@ -40,7 +38,7 @@
             <td>{{item.item_name}}</td>
             <td>{{item.uom_id.unit}}</td>
             <td>{{item.item_rate}}</td>
-            <td><input type="number" value="{{item.item_rate}}" /></td>
+            <td><input type="number" value="{{item.item_rate | number}}" /></td>
             <td><input type="number" /></td>
             <td><input type="number" /></td>
             <td><input type="number" /></td>
