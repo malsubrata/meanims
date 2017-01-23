@@ -20,6 +20,9 @@ var ItemSchema = mongoose.Schema({
     vendor_id:{
         type: mongoose.Schema.Types.ObjectId, ref: 'User'
     },
+    stoct_in: {
+        [{ type: Schema.Types.ObjectId, ref: 'stock_in' }]
+    }
     created_by: {
         type: mongoose.Schema.Types.ObjectId, ref: 'User'
     },

@@ -6,6 +6,10 @@ router.get('/',ensureAuthenticated, function(req, res, next) {
 	res.render('stock/in', { title: 'Stock Update',selectedMenu: 'dashboard' });
 });
 
+router.post('/', ensureAuthenticated, function(req, res, next){
+    
+});
+
 function ensureAuthenticated(req, res, next){
 	if(req.isAuthenticated()){
 		return next();
