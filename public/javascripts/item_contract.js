@@ -30,20 +30,37 @@ app.factory('getAllItems', function($http) {
     };
     return getAllItems;
 });
-app.controller('itemContractsCtrl', ['getAllItems', 'getAllVendor', '$scope', '$sce', function(getAllItems, getAllVendor, $scope, $sce) {
+/* get Contract */
+app.factory('getContract', function($http) {
+    var getContract = {
+        get: function(_id) {
+            // $http returns a promise, which has a then function, which also returns a promise
+            var promise = $http.get('/items/getContract/'+_id).then(function (response) {
+                // The return value gets picked up by the then in the controller.
+                return response.data;
+            });
+            // Return the promise to the controller
+            return promise;
+        }
+    };
+    return getContract;
+});
+app.controller('itemContractsCtrl', ['getAllItems', 'getContract', 'getAllVendor', '$scope', '$sce', '$filter', function(getAllItems, getContract, getAllVendor, $scope, $sce, $filter) {
     getAllItems.getItems().then(function(data) {
         $scope.allItems = data;
     });
     getAllVendor.getVendors().then(function(data) {
         $scope.allVendors = data;
     });
-    $scope.bindEditForm = function(id,name){
-        $scope.cat_id = id;
-        $scope.cat_name = name;
-        $scope.action = $sce.trustAsUrl("/items/category/"+id);
-    };
-    $scope.conformDelete = function(id){
-        $scope.cat_id = id;
-        $scope.action = $sce.trustAsUrl("/items/category/"+id);
+    $scope.conformDelete = function(_id){
+        $scope.action = $sce.trustAsUrl("/items/contract/"+_id);
+    }
+    $scope.bindEditForm = function(_id){
+        getContract.get(_id).then(function(data){
+            $scope.contract = data;
+            $scope.contract.start_date = new Date($scope.contract.start_date);
+            $scope.contract.end_date = new Date($scope.contract.end_date);
+            $scope.action = $sce.trustAsUrl("/items/contract/"+_id);
+        });
     }
 }]);

@@ -1,4 +1,5 @@
 var express = require('express');
+var moment = require('moment');
 var router = express.Router();
 
 /* item category model */
@@ -133,6 +134,13 @@ router.get('/contract/',ensureAuthenticated,function(req,res,next){
         res.render('items/contract',{ title: 'Contracts',selectedMenu: 'items',errors:{}, contracts: Contracts });
     });
 });
+/* get contract */
+router.get('/getContract/:_id',function(req,res,next){
+    Contract.getContractById(req.params._id, function(err,Contract){
+        if(err) throw err;
+        res.json(Contract);
+    });
+});
 
 /* Create new Contract */
 router.post('/contract/',ensureAuthenticated,function(req,res,next){
@@ -167,14 +175,30 @@ router.post('/contract/',ensureAuthenticated,function(req,res,next){
             created_by:req.user._id,
             updated_by:req.user._id
         });
-        console.log(newContract);
         Contract.createContract(newContract,function(err,category){
             if(err) throw err;
         });
         res.redirect('/items/contract/');
     }
 });
-
+/* Update and Delete UOM */
+router.post('/contract/:id',ensureAuthenticated,function(req,res,next){
+    if(req.body.action){
+        if(req.body.action === 'edit' ){
+            Contract.updateContract(req.params.id, req.user._id, req.body, function(err,category){
+                if(err) throw err;
+                res.redirect('/items/contract/');
+            });
+        } else if(req.body.action === 'delete' ){
+            Contract.deleteContract(req.params.id,function(err){
+                if(err) throw err;
+                res.redirect('/items/contract/');
+            });
+        } else{
+            res.redirect('/items/contract/');
+        }
+    }
+});
 /* GET All Items */
 router.get('/getAllItems/',function(req,res,next){
     Items.getAllItems(function(err,items){

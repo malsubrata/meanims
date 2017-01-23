@@ -34,3 +34,9 @@
 .btn-close-error{
     cursor: pointer;
 }
+.table tbody tr td input{
+    width: 100%;
+}
+.table-filter-container{
+    padding: 0px;
+}

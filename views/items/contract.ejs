@@ -51,8 +51,8 @@
                                         <tr>
                                             <td><%= contracts[i].item_id.item_name %></td>
                                             <td><%= contracts[i].item_rate %></td>
-                                            <td><%= contracts[i].start_date %></td>
-                                            <td><%= contracts[i].end_date %></td>
+                                            <td><%= contracts[i].start_date.toDateString() %></td>
+                                            <td><%= contracts[i].end_date.toDateString() %></td>
                                             <td><%= contracts[i].vendor_id.display_name %></td>
                                             <td style="text-align:center;">
                                                 <i class="fa fa-pencil btn btn-primary" ng-click="bindEditForm('<%= contracts[i]._id %>')" aria-hidden="true" data-toggle="modal" data-target="#editModal"></i>&nbsp;
@@ -80,7 +80,7 @@
                                                 <div class="form-group">
                                                     <label for="item_id">Item</label>
                                                     <select class="form-control" id="item_id" name="item_id">
-                                                        <option ng-repeat="(key, item) in allItems" value="item._id">{{item.item_name}}</option>
+                                                        <option ng-repeat="(key, item) in allItems" value="{{item._id}}">{{item.item_name}}</option>
                                                     </select>
                                                 </div>
                                                 
@@ -102,7 +102,7 @@
                                                 <div class="form-group">
                                                     <label for="vendor_id">Vendor</label>
                                                     <select class="form-control" id="vendor_id" name="vendor_id">
-                                                        <option ng-repeat="(key, vendor) in allVendors" value="vendor._id">{{vendor.display_name}}</option>
+                                                        <option ng-repeat="(key, vendor) in allVendors" value="{{vendor._id}}">{{vendor.display_name}}</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -117,23 +117,46 @@
                             <!-- Edit Modal -->
                             <div id="editModal" class="modal fade" role="dialog">
                                 <div class="modal-dialog">
-
                                     <!-- Modal content-->
                                     <div class="modal-content">
                                         <form action="{{action}}" method="post">
                                             <div class="modal-header">
                                                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                                <h4 class="modal-title">Update Unit</h4>
+                                                <h4 class="modal-title">Update Contract</h4>
                                             </div>
                                             <div class="modal-body">
-                                            <input type="hidden" name="action" value="edit">
-                                                <div class="form-group">
-                                                    <label for="name">Unit Name</label>
-                                                    <input type="text" class="form-control" ng-model="cat_name" id="name" name="name" placeholder="Categoy Name">
-                                                </div>
 
+                                                <div class="form-group">
+                                                    <label for="item_id">Item</label>
+                                                    <select class="form-control" id="item_id" name="item_id" ng-model="contract.item_id">
+                                                        <option ng-repeat="(key, item) in allItems" value="{{item._id}}">{{item.item_name}}</option>
+                                                    </select>
+                                                </div>
+                                                
+                                                <div class="form-group">
+                                                    <label for="item_rate">Item Rate</label>
+                                                    <input type="number" class="form-control" id="item_rate" name="item_rate" ng-model="contract.item_rate" />
+                                                </div>
+                                                
+                                                <div class="form-group">
+                                                    <label for="start_date">Start Date</label>
+                                                    <input type="date" class="form-control" id="start_date" name="start_date" ng-model="contract.start_date" />
+                                                </div>
+                                                
+                                                <div class="form-group">
+                                                    <label for="end_date">End Date</label>
+                                                    <input type="date" class="form-control" id="end_date" name="end_date" ng-model="contract.end_date" />
+                                                </div>
+                                                
+                                                <div class="form-group">
+                                                    <label for="vendor_id">Vendor</label>
+                                                    <select class="form-control" id="vendor_id" name="vendor_id" ng-model="contract.vendor_id">
+                                                        <option ng-repeat="(key, vendor) in allVendors" value="{{vendor._id}}">{{vendor.display_name}}</option>
+                                                    </select>
+                                                </div>
                                             </div>
                                             <div class="modal-footer">
+                                                <input type="hidden" name="action" value="edit" />
                                                 <button type="submit" class="btn btn-default">Update</button>
                                             </div>
                                         </form>
@@ -150,7 +173,7 @@
                                         <form action="{{action}}" method="post">
                                             <div class="modal-header">
                                                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                                <h4 class="modal-title">Delete Unit</h4>
+                                                <h4 class="modal-title">Delete Contract</h4>
                                             </div>
                                             <div class="modal-body">
                                                 <div class="form-group">

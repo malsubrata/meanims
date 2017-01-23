@@ -1,0 +1,33 @@
+<form ng-submit="addNewItem(itemForm.$valid)" name="itemForm">
+  <div class="form-group">
+    <label for="item_name">Item Name:</label>
+    <input type="text" class="form-control" id="item_name" ng-model="newItem.item_name" name="item_name" required>
+  </div>
+  <div class="form-group">
+    <label for="uom_id">UOM:</label>
+    <select class="form-control" name="uom_id" id="uom_id" required="" ng-model="newItem.uom_id">
+    	<option ng-repeat="(key, value) in allUOM" value="{{value._id}}">{{value.unit}}</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="item_cat_id">Category:</label>
+    <select class="form-control" name="item_cat_id" id="item_cat_id" required="" ng-model="newItem.item_cat_id" multiple>
+    	<option ng-repeat="(key, value) in allCategory" value="{{value._id}}">{{value.category_name}}</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="item_rate">Item Rate:</label>
+    <input type="number" min="0" class="form-control" name="item_rate" id="item_rate" ng-model="newItem.item_rate" required="">
+  </div>
+  <div class="form-group">
+    <label for="item_description">Remarks:</label>
+    <textarea class="form-control" name="item_description" id="item_description" ng-model="newItem.item_description"></textarea>
+  </div>
+  <div class="form-group">
+    <label for="vendor_id">Vendor:</label>
+    <select class="form-control" name="vendor_id" id="vendor_id" required="" ng-model="newItem.vendor_id">
+    	<option ng-repeat="(key, value) in allVendors" value="{{value._id}}">{{value.display_name}}</option>
+    </select>
+  </div>
+  <button type="submit" class="btn btn-default pull-right">Submit</button>
+</form>

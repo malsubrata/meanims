@@ -52,8 +52,21 @@ module.exports.getContractById = function(id, callback){
     itemContract.findById(id, callback);
 }
 
-module.exports.updateContract = function(_id,Contract,callback){
-    itemContract.update({_id: _id},{unit: Contract.name,updated_date: new Date()},callback);
+module.exports.updateContract = function(_id, user_id, contract, callback){
+    itemContract.update(
+        {
+            _id: _id
+        },
+        {
+            item_id: contract.item_id,
+            item_rate: contract.item_rate,
+            start_date: contract.start_date,
+            end_date: contract.end_date,
+            vendor_id: contract.vendor_id,
+            updated_date: new Date(),
+            updated_by: user_id
+        },callback
+    );
 }
 
 module.exports.deleteContract = function(id,callback){
