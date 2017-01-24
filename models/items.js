@@ -71,6 +71,24 @@ module.exports.getStockItems = function(callback){
     ]).exec(callback);
 }
 
+module.exports.getItemStockOuts = function(callback){
+    Items.find({}).populate([
+        {
+            path: 'uom_id'
+        },
+        {
+            path: 'stock_in',
+            match: {created_date:{ $gte : new Date().setHours(0,0,0,0)}},
+            options: { limit: 1 }
+        },
+        {
+            path: 'stock_out',
+            match: {created_date:{ $gte : new Date().setHours(0,0,0,0)}},
+            options: { limit: 1 }
+        }
+    ]).exec(callback);
+}
+
 module.exports.getItemById = function(id, callback){
     Items.findById(id, callback);
 }
@@ -104,6 +122,18 @@ module.exports.updateStockIn = function(_id,stockInId,callback){
         },
         {
             $push:{ "stock_in": stockInId}
+        },
+        callback
+    );
+}
+
+module.exports.updateStockOut = function(_id,stockOutId,callback){
+    Items.update(
+        {
+            _id: _id
+        },
+        {
+            $push:{ "stock_out": stockOutId}
         },
         callback
     );

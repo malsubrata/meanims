@@ -78,9 +78,9 @@ module.exports.updateStockIn = function(_id,stockIn,callback){
     )
 }
 
-module.exports.getAllStockIn = function(callback){
-    ItemStockInSchema.find({}).populate('item_id',callback);
-}
+//module.exports.getAllStockIn = function(callback){
+//    ItemStockInSchema.find({}).populate('item_id',callback);
+//}
 //
 //module.exports.getCategoryById = function(id, callback){
 //    ItemCategory.findById(id, callback);

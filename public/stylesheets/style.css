@@ -40,3 +40,7 @@
 .table-filter-container{
     padding: 0px;
 }
+.active-menu{
+    color: #fff !important;
+    background: rgba(255,255,255,0.2);
+}

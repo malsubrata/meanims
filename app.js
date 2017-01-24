@@ -23,6 +23,7 @@ var index = require('./routes/index');
 var users = require('./routes/users');
 var items = require('./routes/items');
 var stock = require('./routes/stock-in');
+var issue = require('./routes/issue-items');
 
 var app = express();
 
@@ -82,6 +83,7 @@ app.use('/', index);
 app.use('/users', users);
 app.use('/items',items);
 app.use('/update-stock',stock);
+app.use('/issue-items',issue);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

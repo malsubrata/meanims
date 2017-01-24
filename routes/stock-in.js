@@ -7,12 +7,6 @@ var StockOut = require('../models/item_stock_out');
 /* Items Model */
 var Items = require('../models/items');
 
-
-/* GET home page. */
-router.get('/',ensureAuthenticated, function(req, res, next) {
-	res.render('stock/in', { title: 'Stock Update',selectedMenu: 'dashboard' });
-});
-
 router.get('/getItems', function(req, res, next){
     Items.getStockItems(function(err,items){
         if(err) throw err;
@@ -57,7 +51,10 @@ router.put('/:_id',ensureAuthenticated,function(req,res,newxt){
         res.json(status);
     });
 });
-
+/* GET home page. */
+router.get('/*',ensureAuthenticated, function(req, res, next) {
+	res.render('stock/in', { title: 'Stock Update',selectedMenu: 'update_stock' });
+});
 function ensureAuthenticated(req, res, next){
 	if(req.isAuthenticated()){
 		return next();

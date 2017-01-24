@@ -6,12 +6,17 @@ var ItemStockOutSchema = mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Item'
     },
+    item_rate: {
+        type: Number,
+        default: 0.0
+    },
     issue_qty: {
         type: Number,
         default: 0
     },
-    issue_time: {
-        type: Date, default: Date.now
+    issue_anount: {
+        type: Number,
+        default: 0.0
     },
     store_close_qty: {
         type: Number,
@@ -54,18 +59,21 @@ module.exports.createStockOut = function(newStockOut, callback){
     newStockOut.save(callback);
 }
 
-module.exports.getAllStockOut = function(callback){
-    ItemStockOutSchema.find({}).populate('item_id',callback);
+module.exports.updateStockOut = function(_id,stockOut,callback){
+    ItemStockOutSchema.update(
+        {
+            _id: _id
+        },
+        {
+            issue_qty: stockOut.issue_qty,
+            issue_anount : stockOut.issue_anount,
+            store_close_qty: stockOut.store_close_qty,
+            kitchen_close_qty: stockOut.kitchen_close_qty,
+            total_close_qty: stockOut.total_close_qty,
+            total_close_amount: stockOut.total_close_amount,
+            updated_by: stockOut.updated_by,
+            updated_date: new Date()
+        },
+        callback
+    )
 }
-//
-//module.exports.getCategoryById = function(id, callback){
-//    ItemCategory.findById(id, callback);
-//}
-//
-//module.exports.updateCategory = function(category,callback){
-//    ItemCategory.update({_id: category.id},{category_name: category.name, updated_date: new Date()},callback);
-//}
-//
-//module.exports.deleteCategory = function(id,callback){
-//    ItemCategory.findByIdAndRemove({_id:id},callback);
-//}
