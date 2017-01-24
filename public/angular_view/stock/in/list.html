@@ -14,7 +14,7 @@
             <th>Purchase Qty</th>
             <th>Daily Purchase Amount</th>
             <th>Total Opening Qty</th>
-            <th style="width:10%;"></th>
+            <th></th>
         </tr>
     </thead>
     <tfoot>
@@ -29,49 +29,25 @@
             <th>Purchase Qty</th>
             <th>Daily Purchase Amount</th>
             <th>Total Opening Qty</th>
-            <th style="width:10%;"></th>
+            <th></th>
         </tr>
     </tfoot>
     <tbody>
-        <tr ng-repeat="(key, item) in allItems">
+        <tr ng-repeat="(key, item) in allItems | itemCategoryFilter: category._id">
             <td>{{key}}</td>
             <td>{{item.item_name}}</td>
             <td>{{item.uom_id.unit}}</td>
             <td>{{item.item_rate}}</td>
-            <td><input type="number" value="{{item.item_rate | number}}" /></td>
-            <td><input type="number" /></td>
-            <td><input type="number" /></td>
-            <td><input type="number" /></td>
-            <td><input type="number" /></td>
-            <td><input type="number" /></td>
+            <td><input type="number" ng-model="item.stock_in.reciving_rate" /></td>
+            <td><input type="number" ng-model="item.stock_in.store_opn_qty" /></td>
+            <td><input type="number" ng-model="item.stock_in.kitchen_opn_qty" /></td>
+            <td><input type="number" ng-model="item.stock_in.purchage_qty" /></td>
+            <td><span>{{ item.stock_in.reciving_rate*item.stock_in.purchage_qty | number:2}}</span></td>
+            <td><span>{{ item.stock_in.store_opn_qty + item.stock_in.kitchen_opn_qty + item.stock_in.purchage_qty }}</span></td>
             <td style="text-align:center;">
-                <a ui-sref="app.updateItem({ _id: '{{item._id}}' })"><i class="fa fa-pencil btn btn-primary"></i></a>&nbsp;
-                <i class="fa fa-trash-o btn btn-danger" ng-click="confirmDeleteItem(item._id)" aria-hidden="true" data-toggle="modal" data-target="#deleteModal"></i>
+                <i class="fa fa-floppy-o btn btn-primary" ng-if="!item.stock_in._id" title="Save" aria-hidden="true" ng-click="saveStockIn(key)">&nbsp;</i>
+                <i class="fa fa-floppy-o btn btn-primary" ng-if="item.stock_in._id" title="Update" aria-hidden="true" ng-click="updateStockIn(key,item.stock_in._id)">&nbsp;</i>
             </td>
         </tr>
     </tbody>
 </table>
-<!-- Delete Modal -->
-<div id="deleteModal" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-
-        <!-- Modal content-->
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Delete User</h4>
-            </div>
-            <div class="modal-body">
-                <div class="form-group">
-                    <h2>Are you sure want to delete?</h2>
-                    <input type="hidden" name="action" value="delete">
-                </div>
-
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-danger" ng-click="deleteItem()" data-dismiss="modal">Delete</button>
-            </div>
-        </div>
-
-    </div>
-</div>
