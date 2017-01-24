@@ -52,6 +52,7 @@ app.controller('stockOutlistCtrl', ['getAllItems', 'getAllItemsCategory', '$scop
         angular.forEach(data,function(item,key){
             if(item.stock_out.length == 0){
                 item.stock_out = {
+					item_id: item._id,
                     issue_qty: 0,
                     item_rate: item.item_rate,
                     store_close_qty: 0,
