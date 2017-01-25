@@ -65,8 +65,8 @@ app.controller('stockInlistCtrl', ['getAllItems', 'getAllItemsCategory', '$scope
                         item_id: item._id,
                         contracted_rate: item.item_rate,
                         reciving_rate: item.item_rate,
-                        store_opn_qty: item.stoct_out.store_close_qty,
-                        kitchen_opn_qty: item.stoct_out.kitchen_close_qty,
+                        store_opn_qty: item.stock_out[0].store_close_qty,
+                        kitchen_opn_qty: item.stock_out[0].kitchen_close_qty,
                         purchage_qty : 0
                     }
                 }
