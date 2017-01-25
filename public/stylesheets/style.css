@@ -49,6 +49,12 @@
     color: #aaa;
     font-size: 19px;
 }
+.ic-prev:hover, .ic-nxt:hover{
+    color: black !important;
+}
 .ic-prev, .ic-nxt{
     cursor: pointer;
+}
+.date_string_name{
+    padding: 20px;
 }

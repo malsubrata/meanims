@@ -18,7 +18,7 @@
                         <h3 class="col-sm-6">Daily Sales & Cost Report</h3>
                         <div class="col-sm-6 text-right" style="margin-top:20px">
                             <i class="fa fa-backward ic-prev" ng-click="prevDate()" aria-hidden="true"></i>
-                            <span class="date_string_name"> {{currentDate}} </span>
+                            <i class="date_string_name"> {{currentDate}} </i>
                             <i class="fa fa-forward ic-nxt" ng-click="nextDate()" aria-hidden="true"></i>
                         </div>
                         <div class="clearfix"></div>
@@ -32,7 +32,9 @@
         <!-- /#wrapper -->
 
         <% include ../layouts/foot %>
+        <script type="text/javascript" src="/bower_components/angular-animate/angular-animate.min.js"></script>
         <script type="text/javascript" src="/bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+        <script type="text/javascript" src="/bower_components/moment/moment.js"></script>
         <script type="text/javascript" src="/javascripts/daily_report.js"></script>
     </body>
 
