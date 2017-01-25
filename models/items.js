@@ -139,3 +139,21 @@ module.exports.updateStockOut = function(_id,stockOutId,callback){
     );
 }
 
+module.exports.getDailyReport = function(date, callback){
+	Items.find({}).populate([
+        {
+            path: 'uom_id'
+        },
+        {
+            path: 'stock_in',
+            match: {created_date:{ $gte : new Date(date).setHours(0,0,0,0), $lt: new Date(date).setHours(23,59,59,999)}},
+            options: { limit: 1 }
+        },
+        {
+            path: 'stock_out',
+            match: {created_date:{ $gte : new Date(date).setHours(0,0,0,0), $lt: new Date(date).setHours(23,59,59,999)}},
+            options: { limit: 1 }
+        }
+    ]).exec(callback);
+}
+

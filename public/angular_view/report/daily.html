@@ -1,1 +1,74 @@
-<div>{{date}}</div>
+<div class="form-group table-filter-container col-sm-2 pull-right">
+	<select class="form-control" ng-options="category as category.category_name for category in categories track by category._id" ng-change="onChangeCategory()" ng-model="category"></select>
+</div>
+<div class="clearfix"></div>
+<div class="table-responsive">
+	<table class="table table-striped table-bordered">
+		<thead>
+			<tr>
+				<th>Sl</th>
+				<th>Items</th>
+				<th>Unit</th>
+				<th>Contracted Rate</th>
+				<th>Daily Receiving rate</th>
+				<th>Store Opening Qty</th>
+				<th>Kitchen Opening Qty</th>
+				<th>Purchase Qty</th>
+				<th>Daily Purchase Amount</th>
+				<th>Total Opening Qty</th>
+				<th>Issue Qty</th>
+				<th>Issue Amount</th>
+				<th>Store Closing Qty</th>
+				<th>Kitchen Closing Qty</th>
+				<th>Total Closing Qty</th>
+				<th>Closing Value</th>
+				<th>Consumption Qty</th>
+				<th>Cost Of Consumption</th>
+			</tr>
+		</thead>
+		<tfoot>
+			<tr>
+				<th>Sl</th>
+				<th>Items</th>
+				<th>Unit</th>
+				<th>Contracted Rate</th>
+				<th>Daily Receiving rate</th>
+				<th>Store Opening Qty</th>
+				<th>Kitchen Opening Qty</th>
+				<th>Purchase Qty</th>
+				<th>Daily Purchase Amount</th>
+				<th>Total Opening Qty</th>
+				<th>Issue Qty</th>
+				<th>Issue Amount</th>
+				<th>Store Closing Qty</th>
+				<th>Kitchen Closing Qty</th>
+				<th>Total Closing Qty</th>
+				<th>Closing Value</th>
+				<th>Consumption Qty</th>
+				<th>Cost Of Consumption</th>
+			</tr>
+		</tfoot>
+		<tbody>
+			<tr ng-repeat="(key, item) in allItems | itemCategoryFilter: category._id">
+				<td>{{key+1}}</td>
+				<td>{{item.item_name}}</td>
+				<td>{{item.uom_id.unit}}</td>
+				<td>{{item.item_rate}}</td>
+				<td>{{item.stock_in.reciving_rate}}</td>
+				<td>{{item.stock_in.store_opn_qty}}</td>
+				<td>{{item.stock_in.kitchen_opn_qty}}</td>
+				<td>{{item.stock_in.purchage_qty}}</td>
+				<td>{{ item.stock_in.reciving_rate*item.stock_in.purchage_qty | number:2}}</td>
+				<td>{{ item.stock_in.store_opn_qty + item.stock_in.kitchen_opn_qty + item.stock_in.purchage_qty }}</td>
+				<td>{{item.stock_out.issue_qty}}</td>
+				<td>{{item.stock_out.issue_qty * item.stock_out.item_rate | number:2}}</td>
+				<td>{{item.stock_out.store_close_qty}}</td>
+				<td>{{item.stock_out.kitchen_close_qty}}</td>
+				<td>{{ item.stock_out.store_close_qty + item.stock_out.kitchen_close_qty }}</td>
+				<td>{{ item.stock_out.item_rate * (item.stock_out.store_close_qty + item.stock_out.kitchen_close_qty) | number:2}}</td>
+				<td>{{(item.stock_in.store_opn_qty + item.stock_in.kitchen_opn_qty + item.stock_in.purchage_qty) - (item.stock_out.store_close_qty + item.stock_out.kitchen_close_qty)}}</td>
+				<td>{{item.item_rate * ((item.stock_in.store_opn_qty + item.stock_in.kitchen_opn_qty + item.stock_in.purchage_qty) - (item.stock_out.store_close_qty + item.stock_out.kitchen_close_qty))}}</td>
+			</tr>
+		</tbody>
+	</table>
+</div>

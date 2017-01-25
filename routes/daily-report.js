@@ -6,7 +6,13 @@ var StockIn = require('../models/item_stock_in');
 var StockOut = require('../models/item_stock_out');
 /* Items Model */
 var Items = require('../models/items');
-
+/* Get Daily Report */
+router.get('/getReport/:date',function(req, res, next){
+	Items.getDailyReport(req.params.date, function(err,items){
+		if(err){ return next(err); }
+		res.json(items);
+	})
+})
 /* GET page. */
 router.get('/*',ensureAuthenticated, function(req, res, next) {
 	res.render('report/daily', { title: 'Daily Report',selectedMenu: 'daily-report' });
