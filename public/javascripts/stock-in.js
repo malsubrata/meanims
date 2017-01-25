@@ -75,20 +75,33 @@ app.controller('stockInlistCtrl', ['getAllItems', 'getAllItemsCategory', '$scope
             }
         });
         $scope.allItems = data;
-        console.log($scope.allItems);
     });
     getAllItemsCategory.getCategory().then(function(data){
         $scope.categories = data;
-        $scope.category= $scope.categories[$scope.categories.length-1];
+        if (typeof(Storage) !== "undefined") {
+            if(localStorage.getItem("category") !== "undefined"){
+                console.log(localStorage.getItem("category"));
+                $scope.category = JSON.parse(localStorage.getItem("category"));
+            } else{
+                $scope.category= $scope.categories[0];
+            }
+        } else{
+            $scope.category= $scope.categories[0];
+        }
     });
-
-    $scope.saveStockIn = function(index){
-        $http.post('/update-stock/',$scope.allItems[index].stock_in).then(function(response){
+    $scope.onChangeCategory = function(){
+        console.log($scope.category);
+        if (typeof(Storage) !== "undefined") {
+            localStorage.setItem("category", JSON.stringify($scope.category));
+        }
+    }
+    $scope.saveStockIn = function(item){
+        $http.post('/update-stock/',item.stock_in).then(function(response){
             $state.reload();
         });
     }
-    $scope.updateStockIn = function(index,_id){
-        $http.put('/update-stock/'+_id,$scope.allItems[index].stock_in).then(function(response){
+    $scope.updateStockIn = function(item,_id){
+        $http.put('/update-stock/'+_id,item.stock_in).then(function(response){
             $state.reload();
         });
     }

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <base href="/daily-report/">
+        <% include ../layouts/head %>
+    </head>
+
+    <body>
+
+        <div id="wrapper">
+            <% include ../layouts/header %>
+
+            <!-- Page Content -->
+            <div id="page-content-wrapper" ng-app="dailyReport">
+                <div class="container-fluid">
+                    <div class="row">
+                        <h3 class="col-sm-6">Daily Sales & Cost Report</h3>
+                        <div class="col-sm-6 text-right" style="margin-top:20px">
+                            <i class="fa fa-backward ic-prev" ng-click="prevDate()" aria-hidden="true"></i>
+                            <span class="date_string_name"> {{currentDate}} </span>
+                            <i class="fa fa-forward ic-nxt" ng-click="nextDate()" aria-hidden="true"></i>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="col-lg-12" ui-view="content"></div>
+                    </div>
+                </div>
+            </div>
+            <!-- /#page-content-wrapper -->
+
+        </div>
+        <!-- /#wrapper -->
+
+        <% include ../layouts/foot %>
+        <script type="text/javascript" src="/bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+        <script type="text/javascript" src="/javascripts/daily_report.js"></script>
+    </body>
+
+</html>
+

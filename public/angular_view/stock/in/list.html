@@ -1,5 +1,5 @@
 <div class="form-group table-filter-container col-sm-2 pull-right">
-    <select class="form-control" ng-options="category as category.category_name for category in categories track by category._id" ng-model="category"></select>
+    <select class="form-control" ng-options="category as category.category_name for category in categories track by category._id" ng-change="onChangeCategory()" ng-model="category"></select>
 </div>
 <table class="table table-striped table-bordered">
     <thead>
@@ -34,7 +34,7 @@
     </tfoot>
     <tbody>
         <tr ng-repeat="(key, item) in allItems | itemCategoryFilter: category._id">
-            <td>{{key}}</td>
+            <td>{{key+1}}</td>
             <td>{{item.item_name}}</td>
             <td>{{item.uom_id.unit}}</td>
             <td>{{item.item_rate}}</td>
@@ -45,8 +45,8 @@
             <td><span>{{ item.stock_in.reciving_rate*item.stock_in.purchage_qty | number:2}}</span></td>
             <td><span>{{ item.stock_in.store_opn_qty + item.stock_in.kitchen_opn_qty + item.stock_in.purchage_qty }}</span></td>
             <td style="text-align:center;">
-                <i class="fa fa-floppy-o btn btn-primary" ng-if="!item.stock_in._id" title="Save" aria-hidden="true" ng-click="saveStockIn(key)">&nbsp;</i>
-                <i class="fa fa-floppy-o btn btn-primary" ng-if="item.stock_in._id" title="Update" aria-hidden="true" ng-click="updateStockIn(key,item.stock_in._id)">&nbsp;</i>
+                <i class="fa fa-floppy-o btn btn-primary" ng-if="!item.stock_in._id" title="Save" aria-hidden="true" ng-click="saveStockIn(item)">&nbsp;</i>
+                <i class="fa fa-floppy-o btn btn-primary" ng-if="item.stock_in._id" title="Update" aria-hidden="true" ng-click="updateStockIn(item,item.stock_in._id)">&nbsp;</i>
             </td>
         </tr>
     </tbody>

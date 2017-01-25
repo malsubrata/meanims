@@ -24,6 +24,7 @@ var users = require('./routes/users');
 var items = require('./routes/items');
 var stock = require('./routes/stock-in');
 var issue = require('./routes/issue-items');
+var dailyReport = require('./routes/daily-report');
 
 var app = express();
 
@@ -84,6 +85,7 @@ app.use('/users', users);
 app.use('/items',items);
 app.use('/update-stock',stock);
 app.use('/issue-items',issue);
+app.use('/daily-report',dailyReport);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

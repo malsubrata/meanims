@@ -44,3 +44,11 @@
     color: #fff !important;
     background: rgba(255,255,255,0.2);
 }
+
+.date_string_name, .ic-prev, .ic-nxt{
+    color: #aaa;
+    font-size: 19px;
+}
+.ic-prev, .ic-nxt{
+    cursor: pointer;
+}

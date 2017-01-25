@@ -74,18 +74,34 @@ app.controller('stockOutlistCtrl', ['getAllItems', 'getAllItemsCategory', '$scop
         });
         $scope.allItems = data;
     });
+    
     getAllItemsCategory.getCategory().then(function(data){
         $scope.categories = data;
-        $scope.category= $scope.categories[$scope.categories.length-1];
+        if (typeof(Storage) !== "undefined") {
+            if(localStorage.getItem("category") !== "undefined"){
+                console.log(localStorage.getItem("category"));
+                $scope.category = JSON.parse(localStorage.getItem("category"));
+            } else{
+                $scope.category= $scope.categories[0];
+            }
+        } else{
+            $scope.category= $scope.categories[0];
+        }
     });
+    $scope.onChangeCategory = function(){
+        console.log($scope.category);
+        if (typeof(Storage) !== "undefined") {
+            localStorage.setItem("category", JSON.stringify($scope.category));
+        }
+    }
 
-    $scope.saveStockOut = function(index){
-        $http.post('/issue-items/',$scope.allItems[index].stock_out).then(function(response){
+    $scope.saveStockOut = function(item){
+        $http.post('/issue-items/',item.stock_out).then(function(response){
             $state.reload();
         });
     }
-    $scope.updateStockOut = function(index,_id){
-        $http.put('/issue-items/'+_id,$scope.allItems[index].stock_out).then(function(response){
+    $scope.updateStockOut = function(item,_id){
+        $http.put('/issue-items/'+_id,item.stock_out).then(function(response){
             $state.reload();
         });
     }

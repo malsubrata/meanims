@@ -1,5 +1,5 @@
 <div class="form-group table-filter-container col-sm-2 pull-right">
-    <select class="form-control" ng-options="category as category.category_name for category in categories track by category._id" ng-model="category"></select>
+    <select class="form-control" ng-options="category as category.category_name for category in categories track by category._id" ng-change="onChangeCategory()" ng-model="category"></select>
 </div>
 <table class="table table-striped table-bordered">
     <thead>
@@ -34,7 +34,7 @@
     </tfoot>
     <tbody>
         <tr ng-repeat="(key, item) in allItems | itemCategoryFilter: category._id">
-            <td>{{key}}</td>
+            <td>{{key+1}}</td>
             <td>{{item.item_name}}</td>
             <td>{{item.uom_id.unit}}</td>
             <td>{{item.stock_out.item_rate | number:2}}</td>
@@ -45,8 +45,8 @@
             <td><span>{{ item.stock_out.store_close_qty + item.stock_out.kitchen_close_qty }}</span></td>
             <td><span>{{ item.stock_out.item_rate * (item.stock_out.store_close_qty + item.stock_out.kitchen_close_qty) | number:2}}</span></td>
             <td style="text-align:center;">
-                <i class="fa fa-floppy-o btn btn-primary" ng-if="!item.stock_out._id" title="Save" aria-hidden="true" ng-click="saveStockOut(key)">&nbsp;</i>
-                <i class="fa fa-floppy-o btn btn-primary" ng-if="item.stock_out._id" title="Update" aria-hidden="true" ng-click="updateStockOut(key,item.stock_out._id)">&nbsp;</i>
+                <i class="fa fa-floppy-o btn btn-primary" ng-if="!item.stock_out._id" title="Save" aria-hidden="true" ng-click="saveStockOut(item)">&nbsp;</i>
+                <i class="fa fa-floppy-o btn btn-primary" ng-if="item.stock_out._id" title="Update" aria-hidden="true" ng-click="updateStockOut(item,item.stock_out._id)">&nbsp;</i>
             </td>
         </tr>
     </tbody>
