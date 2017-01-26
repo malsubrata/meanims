@@ -1,42 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
 
-    <head>
-        <base href="/daily-report/">
-        <% include ../layouts/head %>
-    </head>
+	<head>
+		<base href="/daily-report/">
+		<% include ../layouts/head %>
+		<link rel="stylesheet" href="/bower_components/angular-bootstrap-datetimepicker/src/css/datetimepicker.css"/>
+	</head>
 
-    <body>
+	<body>
 
-        <div id="wrapper">
-            <% include ../layouts/header %>
+		<div id="wrapper">
+			<% include ../layouts/header %>
 
-            <!-- Page Content -->
-            <div id="page-content-wrapper" ng-app="dailyReport">
-                <div class="container-fluid">
-                    <div class="row">
-                        <h3 class="col-sm-6">Daily Sales & Cost Report</h3>
-                        <div class="col-sm-6 text-right" style="margin-top:20px">
-                            <i class="fa fa-backward ic-prev" ng-click="prevDate()" aria-hidden="true"></i>
-                            <i class="date_string_name"> {{currentDate}} </i>
-                            <i class="fa fa-forward ic-nxt" ng-click="nextDate()" aria-hidden="true"></i>
-                        </div>
-                        <div class="clearfix"></div>
-                        <div class="col-lg-12" ui-view="content"></div>
-                    </div>
-                </div>
-            </div>
-            <!-- /#page-content-wrapper -->
+			<!-- Page Content -->
+			<div id="page-content-wrapper" ng-app="dailyReport">
+				<div class="container-fluid">
+					<div class="row">
+						<h3 class="col-sm-6">Daily Sales & Cost Report</h3>
+						<div class="col-sm-6 text-right" style="margin-top:20px">
+							
+							<div class="dropdown">
+								<i class="fa fa-backward ic-prev" ng-click="prevDate()" aria-hidden="true"></i>
+								<a  class="dropdown-toggle date_string_name" id="date_string_name" role="button" data-toggle="dropdown" data-target="" href="#">{{currentDate}}</a>
+								<ul class="dropdown-menu pull-right" role="menu">
+									<datetimepicker data-ng-model="dpDate" data-on-set-time="onTimeSet(newDate, oldDate)" data-datetimepicker-config="{ dropdownSelector: '#date_string_name' }"/>
+								</ul>
+								<i class="fa fa-forward ic-nxt" ng-click="nextDate()" aria-hidden="true"></i>
+							</div>
+							
+						</div>
+						<div class="clearfix"></div>
+						<div class="col-lg-12" ui-view="content"></div>
+					</div>
+				</div>
+			</div>
+			<!-- /#page-content-wrapper -->
 
-        </div>
-        <!-- /#wrapper -->
+		</div>
+		<!-- /#wrapper -->
 
-        <% include ../layouts/foot %>
-        <script type="text/javascript" src="/bower_components/angular-animate/angular-animate.min.js"></script>
-        <script type="text/javascript" src="/bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
-        <script type="text/javascript" src="/bower_components/moment/moment.js"></script>
-        <script type="text/javascript" src="/javascripts/daily_report.js"></script>
-    </body>
+		<% include ../layouts/foot %>
+		<script type="text/javascript" src="/bower_components/angular-animate/angular-animate.min.js"></script>
+		<script type="text/javascript" src="/bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+		<script type="text/javascript" src="/bower_components/moment/moment.js"></script>
+		<script type="text/javascript" src="/bower_components/angular-bootstrap-datetimepicker/src/js/datetimepicker.js"></script>
+		<script type="text/javascript" src="/bower_components/angular-bootstrap-datetimepicker/src/js/datetimepicker.templates.js"></script>
+		<script type="text/javascript" src="/javascripts/daily_report.js"></script>
+	</body>
 
 </html>
 

@@ -58,3 +58,8 @@
 .date_string_name{
     padding: 20px;
 }
+
+
+.date_string_name:hover {
+	text-decoration: none;
+}

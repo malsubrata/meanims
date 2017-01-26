@@ -1,26 +1,26 @@
 {
-  "name": "meanims",
-  "description": "Inventory managment system",
-  "main": "",
-  "authors": [
-    "subrata-dc <subrata@dualcube.com>"
-  ],
-  "license": "MIT",
-  "homepage": "",
-  "ignore": [
-    "**/.*",
-    "node_modules",
-    "bower_components",
-    "test",
-    "tests"
-  ],
-  "componentsDirectory": "public/",
-  "dependencies": {
-    "angular": "1.6.1",
-    "angular-ui-router": "^0.3.2",
-    "bootstrap": "^3.3.7",
-    "components-font-awesome": "^4.7.0",
-    "moment": "^2.17.1",
-    "angular-animate": "^1.6.1"
-  }
+	"name": "meanims",
+	"description": "Inventory managment system",
+	"main": "",
+	"authors": [
+		"subrata-dc <subrata@dualcube.com>"
+	],
+	"license": "MIT",
+	"homepage": "",
+	"ignore": [
+		"**/.*",
+		"node_modules",
+		"bower_components",
+		"test",
+		"tests"
+	],
+	"componentsDirectory": "public/",
+	"dependencies": {
+		"angular": "1.6.1",
+		"angular-ui-router": "^0.3.2",
+		"bootstrap": "^3.3.7",
+		"components-font-awesome": "^4.7.0",
+		"moment": "^2.17.1",
+		"angular-animate": "^1.6.1"
+	}
 }

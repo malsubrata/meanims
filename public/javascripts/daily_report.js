@@ -1,4 +1,4 @@
-var app = angular.module('dailyReport',['ui.router','ngAnimate']);
+var app = angular.module('dailyReport',['ui.router','ngAnimate','ui.bootstrap.datetimepicker']);
 app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',function($stateProvider, $urlRouterProvider, $locationProvider) {
 	$stateProvider
 		.state('app',   {
@@ -127,6 +127,11 @@ app.controller('dailyReportCtrl', ['getAllItemsCategory', 'getAllItems', '$scope
 		$scope.cout--;
 		$rootScope.currentDate = moment().add($scope.cout-1, 'days').format('ddd LL');
 		$scope.date = moment().add($scope.cout-1, 'days', 'days').format();
+		$scope.bindReport();
+	}
+	$rootScope.onTimeSet = function(newDate){
+		$rootScope.currentDate = moment(newDate).format('ddd LL');
+		$scope.date = moment(newDate).format();
 		$scope.bindReport();
 	}
 	/* Bind Category */
