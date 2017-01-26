@@ -49,7 +49,7 @@
 			</tr>
 		</tfoot>
 		<tbody>
-			<tr ng-repeat="(key, item) in allItems | itemCategoryFilter: category._id">
+			<tr ng-repeat="(key, item) in allItems | itemCategoryFilter: category._id" class="repeated-item">
 				<td>{{key+1}}</td>
 				<td>{{item.item_name}}</td>
 				<td>{{item.uom_id.unit}}</td>

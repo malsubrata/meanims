@@ -65,7 +65,7 @@ module.exports.getStockItems = function(callback){
         },
         {
             path: 'stock_out',
-            match: {created_date:{ $gte : new Date(-new Date().setHours(0,0,0,0)), $lt: new Date().setHours(0,0,0,0)}},
+            match: {created_date:{ $gte : new Date(-new Date().setHours(0,0,0,0)), $lt: new Date(-new Date().setHours(23,59,59,999))}},
             options: { limit: 1 }
         }
     ]).exec(callback);
