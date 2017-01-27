@@ -67,7 +67,7 @@
 				<td>{{ item.stock_out.store_close_qty + item.stock_out.kitchen_close_qty }}</td>
 				<td>{{ item.stock_out.item_rate * (item.stock_out.store_close_qty + item.stock_out.kitchen_close_qty) | number:2}}</td>
 				<td>{{(item.stock_in.store_opn_qty + item.stock_in.kitchen_opn_qty + item.stock_in.purchage_qty) - (item.stock_out.store_close_qty + item.stock_out.kitchen_close_qty)}}</td>
-				<td>{{item.item_rate * ((item.stock_in.store_opn_qty + item.stock_in.kitchen_opn_qty + item.stock_in.purchage_qty) - (item.stock_out.store_close_qty + item.stock_out.kitchen_close_qty))}}</td>
+				<td>{{item.item_rate * ((item.stock_in.store_opn_qty + item.stock_in.kitchen_opn_qty + item.stock_in.purchage_qty) - (item.stock_out.store_close_qty + item.stock_out.kitchen_close_qty)) | number:2}}</td>
 			</tr>
 		</tbody>
 	</table>
